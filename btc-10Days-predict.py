@@ -21,8 +21,8 @@ df.dropna(inplace=True)
 
 df['HL_PCT'] = (df["High"] - df['Low']) / df['Last'] * 100.0  # High Low oranı
 df['ASKBID_PCT'] = (df['Ask'] - df['Bid']) / df['Ask'] * 100.0  # Ask Bid oranı
-df = df[['High', 'Low', 'Last', 'HL_PCT', 'ASKBID_PCT', 'Volume']]  # DataFrame görünecek parametreler.
-
+#df = df[['High', 'Low', 'Last', 'HL_PCT', 'ASKBID_PCT', 'Volume']]  # DataFrame görünecek parametreler.
+df = df[['Last', 'HL_PCT', 'ASKBID_PCT']]
 dfPr=df.iloc[:-10,:].copy()
 f_out= 10
 
@@ -57,7 +57,7 @@ for i in prediction_set:
     next_datetime+=one_day
     dfPr.loc[next_date]=[np.nan for q in range(len(dfPr.columns)-1 )]+[i]
 
-dfLast['Last'].plot(color='b')
+df['Last'].plot(color='b')
 dfPr['prediction'].plot(color='r')
 plt.axis('auto') # grafiğe göre orlamak iiçin
 plt.xlabel('Date')
